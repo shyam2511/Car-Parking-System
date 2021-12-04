@@ -3,22 +3,13 @@ package com.example.demo.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.Employee;
 import com.example.demo.repository.EmployeeRepository;
 
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("/")
 public class EmployeeController {
     
     @Autowired
@@ -33,5 +24,11 @@ public class EmployeeController {
     public Employee createEmployee(@RequestBody Employee employee) {
     	return employeeRepository.save(employee);
     }
-  
+
+    @GetMapping ("/register")
+    public Employee getRegistered(@RequestParam String username, @RequestParam String password, @RequestParam String confirmpassword, @RequestParam String emailid, @RequestParam String mobilenumber, @RequestParam String carreg) {
+        String s = "Username: " + username + "\n Email :" + emailid + "\n Mobile :" +mobilenumber;
+        Employee e = new Employee("naam nahi pata", "ditto", username, password,"bits", emailid,mobilenumber,carreg);
+        return e;
+    }
 }
